@@ -768,9 +768,7 @@
     
   <script>
   window.addEventListener("DOMContentLoaded", function () {
-    // Escuchamos los clics en todo el documento antes de que Framer los intercepte
     document.addEventListener("click", async function (e) {
-      // Comprobamos si el elemento pulsado o su padre es el botón de enviar
       const btn = e.target.closest('button[type="submit"]') || 
                   e.target.closest('.framer-1dlnxre-container');
 
@@ -778,26 +776,29 @@
         e.preventDefault();
         e.stopPropagation();
 
-        // 1. Recopilamos todos los inputs y textareas de la pantalla
-        const inputs = document.querySelectorAll("input, textarea, select");
         const payload = {
           access_key: "85c75bc0-a8f7-41ff-9f28-ddf22b16742c"
         };
 
-        inputs.forEach(input => {
-          // Ignoramos el campo trampa antibot (website) y recogemos los campos con valor
-          if (input.name && input.name !== "website" && input.type !== "hidden") {
+        // Recorremos los inputs asignando la clave según su tipo o placeholder real
+        document.querySelectorAll("input, textarea, select").forEach(input => {
+          if (input.type === "hidden" || input.name === "website") return;
+
+          const placeholder = (input.placeholder || "").toLowerCase();
+          const type = (input.type || "").toLowerCase();
+
+          if (type === "email" || placeholder.includes("email") || placeholder.includes("@")) {
+            payload["email"] = input.value;
+          } else if (placeholder.includes("scott") || placeholder.includes("nombre") || type === "text" && !payload["name"]) {
+            payload["name"] = input.value;
+          } else if (input.tagName.toLowerCase() === "textarea" || placeholder.includes("mente")) {
+            payload["message"] = input.value;
+          } else if (input.name) {
             payload[input.name] = input.value;
           }
         });
 
-        // 2. Comprobación básica de seguridad
-        if (!payload["Email"] && !payload["email"]) {
-          alert("Por favor, rellena tu email antes de enviar.");
-          return;
-        }
-
-        // 3. Envío directo a Web3Forms
+        // Envío directo a Web3Forms
         try {
           const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -812,8 +813,7 @@
 
           if (result.success) {
             alert("¡Mensaje enviado con éxito!");
-            // Limpiamos los campos
-            inputs.forEach(i => { if (i.type !== "hidden") i.value = ""; });
+            document.querySelectorAll("input, textarea").forEach(i => { if (i.type !== "hidden") i.value = ""; });
           } else {
             alert("Error al enviar: " + result.message);
           }
@@ -821,7 +821,7 @@
           alert("Error de conexión. Inténtalo de nuevo.");
         }
       }
-    }, true); // UseCapture = true para ejecutarse antes de Framer
+    }, true);
   });
 </script>
 </body>
