@@ -836,5 +836,38 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    
+    if (form) {
+      // El parámetro 'true' al final fuerza a ejecutar este código ANTES que el script de Framer
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const formData = new FormData(form);
+        
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+          });
+
+          const result = await response.json();
+
+          if (response.status === 200) {
+            alert("¡Mensaje enviado correctamente!");
+            form.reset();
+          } else {
+            alert("Error al enviar: " + (result.message || "Inténtalo de nuevo"));
+          }
+        } catch (error) {
+          alert("Error de conexión al enviar el formulario.");
+        }
+      }, true);
+    }
+  });
+</script>
 </body>
 </html>
