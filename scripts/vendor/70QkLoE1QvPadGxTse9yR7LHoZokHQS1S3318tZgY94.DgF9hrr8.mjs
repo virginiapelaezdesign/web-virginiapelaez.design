@@ -2765,7 +2765,7 @@ e(() => {
                                                   height: `100%`,
                                                   id: `LTlvqTCjh`,
                                                   layoutId: `LTlvqTCjh`,
-                                                  mv8dA2jdy: `mailto:help@davies@gmail.com`,
+                                                  mv8dA2jdy: `mailto:hola@virginiapelaez.design`,
                                                   mXXClOADH: `hola@virginiapelaez.design`,
                                                   name: `Mail`,
                                                   tOs9JlKvR: `var(--token-b755dd03-f6c6-4b4f-b40a-7409b3707a27, rgb(7, 196, 44))`,
