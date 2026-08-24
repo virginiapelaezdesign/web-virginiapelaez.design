@@ -769,6 +769,7 @@
   <script>
   window.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", async function (e) {
+      // Detecta el clic en el botón de enviar
       const btn = e.target.closest('button[type="submit"]') || 
                   e.target.closest('.framer-1dlnxre-container');
 
@@ -780,21 +781,31 @@
           access_key: "85c75bc0-a8f7-41ff-9f28-ddf22b16742c"
         };
 
-        // Recorremos los inputs asignando la clave según su tipo o placeholder real
-        document.querySelectorAll("input, textarea, select").forEach(input => {
-          if (input.type === "hidden" || input.name === "website") return;
+        // 1. Recogemos el desplegable de opciones (¿En qué te puedo ayudar?)
+        const selectHelp = document.querySelector('select[name="¿En qué te puedo ayudar?"]');
+        if (selectHelp) {
+          payload["En que te puedo ayudar"] = selectHelp.value;
+        }
 
-          const placeholder = (input.placeholder || "").toLowerCase();
-          const type = (input.type || "").toLowerCase();
+        // 2. Recogemos el campo de texto/textarea (Cuéntame qué tienes en mente)
+        const textareaMsg = document.querySelector('textarea');
+        if (textareaMsg) {
+          payload["mensaje"] = textareaMsg.value;
+        }
 
-          if (type === "email" || placeholder.includes("email") || placeholder.includes("@")) {
-            payload["email"] = input.value;
-          } else if (placeholder.includes("scott") || placeholder.includes("nombre") || type === "text" && !payload["name"]) {
-            payload["name"] = input.value;
-          } else if (input.tagName.toLowerCase() === "textarea" || placeholder.includes("mente")) {
-            payload["message"] = input.value;
-          } else if (input.name) {
-            payload[input.name] = input.value;
+        // 3. Recogemos todos los inputs de texto normales (Nombre y Email)
+        document.querySelectorAll('input:not([type="hidden"])').forEach(input => {
+          // Ignoramos los campos trampa invisibles de Framer
+          if (["website", "company", "message", "subject", "title", "description"].includes(input.name)) return;
+
+          const val = input.value;
+          if (!val) return;
+
+          // Si contiene un @ es el Email, si no, es el Nombre
+          if (val.includes("@") || input.type === "email") {
+            payload["email"] = val;
+          } else {
+            payload["nombre"] = val;
           }
         });
 
@@ -813,7 +824,9 @@
 
           if (result.success) {
             alert("¡Mensaje enviado con éxito!");
-            document.querySelectorAll("input, textarea").forEach(i => { if (i.type !== "hidden") i.value = ""; });
+            // Limpiamos los campos rellenos
+            if (textareaMsg) textareaMsg.value = "";
+            document.querySelectorAll('input:not([type="hidden"])').forEach(i => i.value = "");
           } else {
             alert("Error al enviar: " + result.message);
           }
