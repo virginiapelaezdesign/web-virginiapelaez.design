@@ -25,7 +25,13 @@
     <meta name="twitter:description" content="Portfolio de Virginia Peláez: Responsable de Marketing y Diseñadora Gráfica especializada en rebrandings, desarrollo web UI/UX, SEO/GEO y herramientas de venta de alto impacto.">
     <meta name="twitter:image" content="https://framerusercontent.com/images/OUcoLXtvrtLPdJ3YomesoWFHOo.png">
 	
-	
+	<script type="importmap">
+{
+  "imports": {
+    "init.mjs": "./scripts/vendor/init.mjs"
+  }
+}
+</script>
 	<script>try{if(localStorage.getItem("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel="modulepreload";n.href="scripts/vendor/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
 	<link rel="canonical" href="assets/misc/asset-9458a5"><meta property="og:url" content="assets/misc/asset-9458a5"><!-- Start of headStart -->
     
@@ -761,107 +767,37 @@
 	<!-- Start of bodyEnd -->
     
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("vp-contact-form");
-  const button = document.getElementById("vp-submit");
-  const result = document.getElementById("vp-form-result");
+  window.addEventListener("DOMContentLoaded", function () {
+    // Escuchamos los clics en todo el documento antes de que Framer los intercepte
+    document.addEventListener("click", async function (e) {
+      // Comprobamos si el elemento pulsado o su padre es el botón de enviar
+      const btn = e.target.closest('button[type="submit"]') || 
+                  e.target.closest('.framer-1dlnxre-container');
 
-  if (!form) return;
-
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    button.disabled = true;
-    button.querySelector("span").textContent = "Enviando...";
-    result.textContent = "";
-    result.className = "vp-form-result";
-
-    try {
-      const formData = new FormData(form);
-
-      const response = await fetch(
-        "https://api.web3forms.com/submit",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json"
-          },
-          body: formData
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        result.textContent =
-          "Gracias. Tu mensaje se ha enviado correctamente.";
-        result.className = "vp-form-result success";
-
-        form.reset();
-
-        button.querySelector("span").textContent = "Enviado";
-      } else {
-        throw new Error(
-          data.message || "No se ha podido enviar el formulario."
-        );
-      }
-
-    } catch (error) {
-
-      console.error("Web3Forms error:", error);
-
-      result.textContent =
-        "No se ha podido enviar el mensaje. Inténtalo de nuevo.";
-
-      result.className = "vp-form-result error";
-
-      button.querySelector("span").textContent = "Enviar";
-
-    } finally {
-
-      setTimeout(function () {
-        button.disabled = false;
-
-        if (button.querySelector("span").textContent === "Enviando...") {
-          button.querySelector("span").textContent = "Enviar";
-        }
-      }, 3000);
-
-    }
-  });
-});
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Busca el botón de envío por tipo o texto
-    const submitBtn = document.querySelector('button[type="submit"]') || 
-                      Array.from(document.querySelectorAll('button')).find(b => 
-                        b.textContent.toLowerCase().includes('enviar') || 
-                        b.textContent.toLowerCase().includes('send')
-                      );
-
-    if (submitBtn) {
-      submitBtn.addEventListener("click", async function (e) {
+      if (btn) {
         e.preventDefault();
         e.stopPropagation();
 
-        // Extrae los datos de los campos de la pantalla
-        const inputs = document.querySelectorAll("input, textarea");
+        // 1. Recopilamos todos los inputs y textareas de la pantalla
+        const inputs = document.querySelectorAll("input, textarea, select");
         const payload = {
           access_key: "85c75bc0-a8f7-41ff-9f28-ddf22b16742c"
         };
 
         inputs.forEach(input => {
-          if (input.name && input.type !== "hidden") {
+          // Ignoramos el campo trampa antibot (website) y recogemos los campos con valor
+          if (input.name && input.name !== "website" && input.type !== "hidden") {
             payload[input.name] = input.value;
           }
         });
 
+        // 2. Comprobación básica de seguridad
+        if (!payload["Email"] && !payload["email"]) {
+          alert("Por favor, rellena tu email antes de enviar.");
+          return;
+        }
+
+        // 3. Envío directo a Web3Forms
         try {
           const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -876,15 +812,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (result.success) {
             alert("¡Mensaje enviado con éxito!");
-            inputs.forEach(i => { if(i.type !== "hidden") i.value = ""; });
+            // Limpiamos los campos
+            inputs.forEach(i => { if (i.type !== "hidden") i.value = ""; });
           } else {
-            alert("Error de Web3Forms: " + result.message);
+            alert("Error al enviar: " + result.message);
           }
         } catch (err) {
-          alert("Error de conexión al enviar el formulario.");
+          alert("Error de conexión. Inténtalo de nuevo.");
         }
-      }, true);
-    }
+      }
+    }, true); // UseCapture = true para ejecutarse antes de Framer
   });
 </script>
 </body>
