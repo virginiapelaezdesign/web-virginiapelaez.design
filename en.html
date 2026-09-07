@@ -1547,5 +1547,108 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<script id="vp-web3forms-handler">
+(() => {
+  const ENDPOINT = 'https://api.web3forms.com/submit';
+  const isEnglish = true;
+  const SUCCESS = isEnglish ? 'Message sent successfully.' : 'Mensaje enviado correctamente.';
+  const ERROR = isEnglish ? 'Something went wrong. Please try again.' : 'Ha ocurrido un error. Inténtalo de nuevo.';
+  const SENDING = isEnglish ? 'Sending...' : 'Enviando...';
+  const SEND_LABEL = isEnglish ? 'Send' : 'Enviar';
+
+  function getStatus(form) {
+    let status = form.querySelector('.vp-form-result');
+    if (status) return status;
+    status = document.createElement('div');
+    status.className = 'vp-form-result';
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('role', 'status');
+    status.style.marginTop = '14px';
+    status.style.minHeight = '20px';
+    status.style.fontFamily = 'Inter, Inter Placeholder, sans-serif';
+    status.style.fontSize = '13px';
+    status.style.lineHeight = '20px';
+    form.appendChild(status);
+    return status;
+  }
+
+  function setButtonLabel(button, text) {
+    if (!button) return;
+    const span = button.querySelector('span');
+    if (span) span.textContent = text;
+    else button.textContent = text;
+  }
+
+  async function handleSubmit(event) {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    const action = (form.getAttribute('action') || '').replace(/\/$/, '');
+    if (action !== ENDPOINT) return;
+    if (form.dataset.vpWeb3formsBound === 'submitting') return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+    form.dataset.vpWeb3formsBound = 'submitting';
+
+    const button = form.querySelector('button[type="submit"], input[type="submit"]');
+    const status = getStatus(form);
+    const originalLabel = button?.querySelector('span')?.textContent || button?.value || SEND_LABEL;
+    if (button) {
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      setButtonLabel(button, SENDING);
+    }
+    status.className = 'vp-form-result';
+    status.textContent = SENDING;
+
+    try {
+      const formData = new FormData(form);
+
+      // Keep the same Access Key already configured in the forms, and make
+      // the notification metadata explicit for both language pages.
+      if (!formData.get('subject')) formData.set('subject', 'New enquiry from virginiapelaez.design');
+      if (!formData.get('from_name')) formData.set('from_name', 'virginiapelaez.design');
+
+      const payload = Object.fromEntries(formData.entries());
+      const response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let result = null;
+      try { result = await response.json(); } catch (_) {}
+
+      if (!response.ok || !result || result.success !== true) {
+        throw new Error(result?.message || `HTTP ${response.status}`);
+      }
+
+      form.reset();
+      status.className = 'vp-form-result success';
+      status.textContent = SUCCESS;
+      if (button) setButtonLabel(button, originalLabel);
+    } catch (error) {
+      console.error('[Virginia Peláez] Web3Forms submission failed:', error);
+      status.className = 'vp-form-result error';
+      status.textContent = ERROR;
+      if (button) setButtonLabel(button, originalLabel);
+    } finally {
+      form.dataset.vpWeb3formsBound = 'idle';
+      if (button) {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+      }
+    }
+  }
+
+  // Capture phase is intentional: Framer's generated form handlers can also
+  // listen for submit events. We intercept the event before they can hijack it.
+  document.addEventListener('submit', handleSubmit, true);
+})();
+</script>
 </body>
 </html>
