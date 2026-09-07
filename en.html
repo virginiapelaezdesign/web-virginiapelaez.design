@@ -712,21 +712,7 @@
 }
 </style>
 	
-<script>
-  // Automatic language detection on the Spanish root page.
-  (function() {
-    var userLanguageChosen = localStorage.getItem('idioma_forzado');
-    var path = window.location.pathname.replace(/\/+$/, '') || '/';
 
-    if (path === '/' && userLanguageChosen !== 'en') {
-      var userLang = navigator.language || navigator.userLanguage;
-      if (userLang && userLang.toLowerCase().startsWith('en')) {
-        localStorage.setItem('idioma_forzado', 'en');
-        window.location.href = '/en.html';
-      }
-    }
-  })();
-</script>
 
 
 <style id="vp-responsive-fixes">
@@ -957,7 +943,7 @@ img, video {
   <input
     type="hidden"
     name="subject"
-    value="Nueva consulta desde virginiapelaez.design"
+    value="New enquiry from virginiapelaez.design"
   />
 
   <input
@@ -1166,7 +1152,6 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       e.stopPropagation();
       const selectedLang = option.dataset.lang;
-      localStorage.setItem('idioma_forzado', selectedLang);
       closeDropdown();
       window.location.href = selectedLang === 'en' ? '/en' : '/';
     });
