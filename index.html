@@ -5730,80 +5730,67 @@ document.addEventListener('DOMContentLoaded', () => {
 <script id="vp-web3forms-working-handler">
   window.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", async function (e) {
-      const btn = e.target.closest('button[type="submit"]') ||
+      const btn = e.target.closest('button[type="submit"]') || 
                   e.target.closest('.framer-1dlnxre-container');
 
-      if (!btn) return;
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
 
-      const form = btn.closest('form[action*="web3forms.com"]') ||
-                   document.querySelector('form[action*="web3forms.com"]');
-      if (!form || form.dataset.vpWeb3formsBusy === '1') return;
+        const payload = {
+          access_key: "85c75bc0-a8f7-41ff-9f28-ddf22b16742c"
+        };
 
-      e.preventDefault();
-      e.stopPropagation();
-      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
-      form.dataset.vpWeb3formsBusy = '1';
+        // 1. Recogemos el desplegable (¿En qué te puedo ayudar?)
+        const selectHelp = document.querySelector('select');
+        if (selectHelp) {
+          payload["¿En qué te puedo ayudar?"] = selectHelp.value;
+        }
 
-      const payload = {
-        access_key: (form.querySelector('input[name="access_key"]') || {}).value ||
-          "85c75bc0-a8f7-41ff-9f28-ddf22b16742c"
-      };
+        // 2. RECOGIDA FORZADA DEL TEXTAREA (Mensaje principal)
+        // Buscamos específicamente el textarea de Framer sin importar su atributo name
+        const textareaMsg = document.querySelector('textarea');
+        if (textareaMsg) {
+          payload["message"] = textareaMsg.value;
+        }
 
-      const subject = form.querySelector('input[name="subject"]');
-      const fromName = form.querySelector('input[name="from_name"]');
-      if (subject && subject.value) payload.subject = subject.value;
-      if (fromName && fromName.value) payload.from_name = fromName.value;
+        // 3. Recogemos los inputs de texto normales (Nombre y Email)
+        document.querySelectorAll('input:not([type="hidden"])').forEach(input => {
+          if (["website", "company", "message", "subject", "title", "description"].includes(input.name)) return;
 
-      const selectHelp = form.querySelector('select');
-      if (selectHelp) payload.service = selectHelp.value;
+          const val = input.value;
+          if (!val) return;
 
-      const textareaMsg = form.querySelector('textarea');
-      if (textareaMsg) payload.message = textareaMsg.value;
-
-      form.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"])').forEach(input => {
-        const val = input.value;
-        if (!val) return;
-        if (val.includes("@") || input.type === "email") payload.email = val;
-        else if (!payload.name) payload.name = val;
-      });
-
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(payload)
+          if (val.includes("@") || input.type === "email") {
+            payload["email"] = val;
+          } else {
+            payload["name"] = val;
+          }
         });
 
-        const result = await response.json();
-        const status = form.querySelector('.vp-form-result');
+        // Envío directo a Web3Forms
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
 
-        if (result.success) {
-          if (status) {
-            status.className = 'vp-form-result success';
-            status.textContent = '¡Mensaje enviado con éxito!';
+          const result = await response.json();
+
+          if (result.success) {
+            alert("¡Mensaje enviado con éxito!");
+            if (textareaMsg) textareaMsg.value = "";
+            document.querySelectorAll('input:not([type="hidden"])').forEach(i => i.value = "");
+          } else {
+            alert("Error al enviar: " + result.message);
           }
-          alert('¡Mensaje enviado con éxito!');
-          form.reset();
-        } else {
-          if (status) {
-            status.className = 'vp-form-result error';
-            status.textContent = 'Error al enviar: ' + (result.message || 'Unknown error');
-          }
-          alert('Error al enviar: ' + (result.message || 'Unknown error'));
+        } catch (err) {
+          alert("Error de conexión. Inténtalo de nuevo.");
         }
-      } catch (err) {
-        console.error('[Virginia Peláez] Web3Forms submission failed:', err);
-        const status = form.querySelector('.vp-form-result');
-        if (status) {
-          status.className = 'vp-form-result error';
-          status.textContent = 'Error de conexión. Inténtalo de nuevo.';
-        }
-        alert('Error de conexión. Inténtalo de nuevo.');
-      } finally {
-        form.dataset.vpWeb3formsBusy = '0';
       }
     }, true);
   });
