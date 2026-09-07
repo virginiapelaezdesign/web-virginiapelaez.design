@@ -939,7 +939,173 @@ img, video {
 .framer-text {
   overflow-wrap: anywhere;
 }
-</style></head>
+</style>
+<style id="vp-responsive-fixes">
+@media (max-width: 809.98px) {
+  .framer-cvlU1.framer-72rtr7 {
+    width: 100%;
+    max-width: 100%;
+  }
+  .framer-cvlU1 .framer-riu1qc-container {
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
+  .framer-cvlU1 .framer-142f6q6 {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+</style>
+
+<style id="vp-hero-mobile-safe-fix">
+/* HERO — mobile only. Keep desktop/tablet Framer layout untouched. */
+@media (max-width: 809.98px) {
+  #main .framer-psxjgk {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #main .framer-142f6q6 {
+    width: 100% !important;
+    max-width: 1340px !important;
+    padding: 56px 15px 24px !important;
+    gap: 28px !important;
+    align-items: stretch !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  #main .framer-wxkncz {
+    width: 100% !important;
+    padding: 0 6px !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+  }
+
+  #main .framer-y8jgyo {
+    display: none !important;
+  }
+
+  #main .framer-11mhdeu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  #main .framer-t3pbnp {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    flex: none !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 22px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  #main .framer-2flya2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  #main .framer-2flya2 p {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  #main .framer-1dgfx26-container {
+    width: auto !important;
+    max-width: 100% !important;
+    flex: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  /* The CTA is rendered with an inline Framer animation state (opacity:0).
+     On phones the hero must remain visible even before the animation runs. */
+  #main .framer-1dgfx26-container > *,
+  #main .framer-1dgfx26-container a {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  /* Keep the copy/CTA above the banner when the phone layout stacks them. */
+  #main .framer-wxkncz,
+  #main .framer-11mhdeu,
+  #main .framer-t3pbnp {
+    position: relative !important;
+    z-index: 3 !important;
+  }
+
+  /* The background video is absolutely positioned and otherwise bleeds
+     into the following section on narrow screens. Keep the Services area
+     opaque so the Expertise/Alcance header sits on solid black. */
+  #main .framer-1er48uo {
+    position: relative !important;
+    z-index: 4 !important;
+    background: #000 !important;
+  }
+
+  #main .framer-cVd4o.framer-1cti1bi {
+    width: max-content !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex: none !important;
+  }
+
+  #main .framer-160t3mu {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    aspect-ratio: 5.972222222222222 !important;
+    flex: none !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  #main .framer-160t3mu > div[data-framer-background-image-wrapper="true"],
+  #main .framer-160t3mu img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  #main .framer-160t3mu img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
+</style>
+</head>
 <body>
 <!-- Start of bodyStart -->
 <!-- End of bodyStart -->
@@ -1286,7 +1452,7 @@ img, video {
 <div class="framer-cvlU1 framer-vdwex framer-kIlae framer-CPz0F framer-cgCJR framer-RWunR framer-Ddoj2 framer-72rtr7" data-framer-root="" style="min-height:100vh;width:auto;display:contents">
 <div class="framer-riu1qc-container" data-framer-appear-id="riu1qc" data-framer-name="Video Background" name="Video Background" style="opacity:0.001;transform:none">
 <!--$-->
-<video loop="" muted="" playsinline="" preload="none" src="assets/misc/ydYedybUk7hgyh2cnXkO8Zv94.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:rgba(0, 0, 0, 0);object-position:50% 50%">
+<video loop="" muted="" playsinline="" autoplay="" preload="auto" src="assets/misc/ydYedybUk7hgyh2cnXkO8Zv94.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:rgba(0, 0, 0, 0);object-position:50% 50%">
 </video>
 <!--/$-->
 </div>
@@ -2564,9 +2730,7 @@ img, video {
 </div>
 <div class="ssr-variant hidden-1cirhan hidden-a63ipl">
 <div class="framer-1gj80n0" data-framer-name="About Me" id="about">
-<div data-framer-background-image-wrapper="true" style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0">
-<img alt="" decoding="async" height="2718" loading="lazy" sizes="(min-width: 1200px) 100vw" src="assets/images/?width=4320&amp;height=2718" srcset="assets/images/?scale-down-to=512&amp;width=4320&amp;height=2718 512w, assets/images/?scale-down-to=1024&amp;width=4320&amp;height=2718 1024w, assets/images/ 2048w, assets/images/?scale-down-to=4096&amp;width=4320&amp;height=2718 4096w, assets/images/?width=4320&amp;height=2718 4320w" style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover" width="4320"/>
-</div>
+<div data-framer-background-image-wrapper="true" style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0;background:#000"></div>
 <div class="framer-1dx4d15" data-framer-name="Container">
 <div class="framer-ce0njz" data-framer-name="Video &amp; Sign">
 <div class="framer-n5bz7c" data-framer-name="Video Container">
@@ -2574,7 +2738,7 @@ img, video {
 </div>
 <div class="framer-cdhl4c-container">
 <!--$-->
-<video loop="" muted="" playsinline="" preload="none" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
+<video loop="" muted="" playsinline="" autoplay="" preload="auto" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
 </video>
 <!--/$-->
 </div>
@@ -3310,7 +3474,7 @@ img, video {
 </div>
 <div class="framer-cdhl4c-container">
 <!--$-->
-<video loop="" muted="" playsinline="" preload="none" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
+<video loop="" muted="" playsinline="" autoplay="" preload="auto" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
 </video>
 <!--/$-->
 </div>
@@ -4046,7 +4210,7 @@ img, video {
 </div>
 <div class="framer-cdhl4c-container">
 <!--$-->
-<video loop="" muted="" playsinline="" preload="none" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
+<video loop="" muted="" playsinline="" autoplay="" preload="auto" src="assets/misc/vOcuZ7qWglmrnT8Y3tYBHc1zI.mp4" style="cursor:auto;width:100%;height:100%;border-radius:0px;display:block;object-fit:cover;background-color:var(--token-4b341338-949e-448c-99a3-d0281ee083a2, rgb(0, 0, 0));object-position:50% 50%">
 </video>
 <!--/$-->
 </div>
