@@ -634,6 +634,7 @@
 
 /* Botón principal */
 .lang-btn {
+  text-decoration: none;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
@@ -649,7 +650,8 @@
   transition: all 0.2s ease;
 }
 
-.lang-btn:hover {
+.lang-btn:hover,
+.lang-btn:focus-visible {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -658,7 +660,8 @@
   transition: transform 0.2s ease;
 }
 
-.lang-selector-wrapper.active .lang-chevron {
+.lang-selector-wrapper:hover .lang-chevron,
+.lang-selector-wrapper:focus-within .lang-chevron {
   transform: rotate(180deg);
 }
 
@@ -680,7 +683,8 @@
   z-index: 100;
 }
 
-.lang-selector-wrapper.active .lang-dropdown {
+.lang-selector-wrapper:hover .lang-dropdown,
+.lang-selector-wrapper:focus-within .lang-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -688,7 +692,10 @@
 
 /* Opciones del menú */
 .lang-option {
+  display: block;
   width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
   text-align: left;
   background: transparent;
   border: none;
@@ -856,17 +863,17 @@
 </head>
 <body>
 
-    <!-- Language selector: mounted into Framer's active MENU container -->
+    <!-- Language selector: plain HTML links; no JavaScript routing -->
     <div class="lang-selector-wrapper" aria-label="Language selector">
-      <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
-        <span id="current-lang">EN</span>
+      <a class="lang-btn" href="en.html" aria-label="English">
+        <span>EN</span>
         <svg class="lang-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </button>
-      <div id="lang-dropdown" class="lang-dropdown" role="menu">
-        <button class="lang-option" data-lang="es" role="menuitem" type="button">ES — Spanish</button>
-        <button class="lang-option active" data-lang="en" role="menuitem" type="button">EN — English</button>
+      </a>
+      <div class="lang-dropdown" role="menu">
+        <a class="lang-option active" href="en.html" role="menuitem">EN — English</a>
+        <a class="lang-option" href="index.html" role="menuitem">ES — Spanish</a>
       </div>
     </div>
 
@@ -1057,107 +1064,12 @@ img, video {
                 <script type="framer/appear" id="__framer__appearAnimationsContent">{"riu1qc":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"delay":0,"duration":0.6,"ease":[0,0,1,1],"type":"tween"},"x":0,"y":0}}},"1kvg7p3":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"bounce":0.2,"delay":0,"duration":0.4,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"bounce":0.2,"delay":0,"duration":0.4,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"bounce":0.2,"delay":0,"duration":0.4,"type":"spring"},"x":0,"y":0}}},"1gke07t":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}}},"1nz7nd1":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}}},"1aezhog":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}}},"ac6fwg":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}}},"se856j":{"default":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"1cirhan":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}},"a63ipl":{"initial":{"opacity":0.001,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"x":0,"y":0},"animate":{"opacity":1,"rotate":0,"rotateX":0,"rotateY":0,"scale":1,"skewX":0,"skewY":0,"transition":{"damping":30,"delay":0.05,"mass":1,"stiffness":200,"type":"spring"},"x":0,"y":0}}}}</script>
                 <script type="framer/appear" id="__framer__breakpoints">[{"hash":"72rtr7","mediaQuery":"(min-width: 1200px)"},{"hash":"1cirhan","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"a63ipl","mediaQuery":"(max-width: 809.98px)"},{"hash":"1wtq3gj","mediaQuery":"(min-width: 1200px)"},{"hash":"d9jhyv","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"1vqgkdy","mediaQuery":"(max-width: 809.98px)"}]</script><script data-framer-appear-animation="no-preference">(()=>{function c(i,o,s){if(window.__framer_disable_appear_effects_optimization__||typeof animator>"u")return;let e={detail:{bg:document.hidden}};requestAnimationFrame(()=>{let a="framer-appear-start";performance.mark(a,e),animator.animateAppearEffects(JSON.parse(window.__framer__appearAnimationsContent.text),(m,p,d)=>{let t=document.querySelector(m);if(t)for(let[r,f]of Object.entries(p))animator.startOptimizedAppearAnimation(t,r,f,d[r])},i,o,s&&window.matchMedia("(prefers-reduced-motion:reduce)").matches===!0,animator.getActiveVariantHash(JSON.parse(window.__framer__breakpoints.text)));let n="framer-appear-end";performance.mark(n,e),performance.measure("framer-appear",{start:a,end:n,detail:e.detail})})}return c})()("data-framer-appear-id","__Appear_Animation_Transform__",false)</script><script>(()=>{function d(e){let t=Date.prototype.toLocaleString,o=Date.prototype.toLocaleDateString;t&&(Date.prototype.toLocaleString=function(r,n){let i=s(this,r,n);return u(e.current.Date.toLocaleString,i,()=>t.call(this,r,n))}),o&&(Date.prototype.toLocaleDateString=function(r,n){let i=s(this,r,n);return u(e.current.Date.toLocaleDateString,i,()=>o.call(this,r,n))});let a=Object.getOwnPropertyDescriptors(Intl.DateTimeFormat.prototype).format.get,c=Intl.DateTimeFormat.prototype.formatRange,b=Intl.DateTimeFormat.prototype.formatToParts,D=Intl.DateTimeFormat.prototype.formatRangeToParts;a&&Object.defineProperty(Intl.DateTimeFormat.prototype,"format",{get(){function m(r){let n=p(this),i=s(r,n);return u(e.current.DateTimeFormat.format,i,()=>a.call(this)(r))}return m.bind(this)}}),c&&(Intl.DateTimeFormat.prototype.formatRange=function(r,n){let i=p(this),l=s(r,n,i);return u(e.current.DateTimeFormat.formatRange,l,()=>c.call(this,r,n))}),b&&(Intl.DateTimeFormat.prototype.formatToParts=function(r){let n=p(this),i=s(r,n);return u(e.current.DateTimeFormat.formatToParts,i,()=>b.call(this,r)).map(g)}),D&&(Intl.DateTimeFormat.prototype.formatRangeToParts=function(r,n){let i=p(this),l=s(r,n,i);return u(e.current.DateTimeFormat.formatRangeToParts,l,()=>D.call(this,r,n)).map(g)});let y=Number.prototype.toLocaleString;y&&(Number.prototype.toLocaleString=function(r,n){let i=s(this,r,n);return u(e.current.Number.toLocaleString,i,()=>y.call(this,r,n))});let h=Object.getOwnPropertyDescriptors(Intl.NumberFormat.prototype).format.get,F=Intl.NumberFormat.prototype.formatRange,T=Intl.NumberFormat.prototype.formatToParts,I=Intl.NumberFormat.prototype.formatRangeToParts;h&&Object.defineProperty(Intl.NumberFormat.prototype,"format",{get(){function m(r){let n=f(this),i=s(r,n);return u(e.current.NumberFormat.format,i,()=>h.call(this)(r))}return m.bind(this)}}),F&&(Intl.NumberFormat.prototype.formatRange=function(r,n){let i=f(this),l=s(r,n,i);return u(e.current.NumberFormat.formatRange,l,()=>F.call(this,r,n))}),T&&(Intl.NumberFormat.prototype.formatToParts=function(r){let n=f(this),i=s(r,n);return u(e.current.NumberFormat.formatToParts,i,()=>T.call(this,r)).map(g)}),I&&(Intl.NumberFormat.prototype.formatRangeToParts=function(r,n){let i=f(this),l=s(r,n,i);return u(e.current.NumberFormat.formatRangeToParts,l,()=>I.call(this,r,n)).map(g)})}function P(e,t){return typeof t=="bigint"?`${t}n`:t instanceof Date?t.getTime():t}function s(...e){let t=JSON.stringify(e,P),o=0;for(let a=0;a<t.length;a++)o+=t.charCodeAt(a),o+=o<<10,o^=o>>6;return o+=o<<3,o^=o>>11,o+=o<<15,o>>>0}function u(e,t,o){let a=e[t];if(typeof a<"u")return a;let c=o();return e[t]=c,c}function g(e){return{...e}}function p(e){let t=e.resolvedOptions(),o={locale:t.locale,calendar:t.calendar,numberingSystem:t.numberingSystem,timeZone:t.timeZone,hour12:t.hour12,weekday:t.weekday,era:t.era,year:t.year,month:t.month,day:t.day,hour:t.hour,minute:t.minute,second:t.second,timeZoneName:t.timeZoneName};for(let a in t)a in o||(o[a]=t[a]);return o}function f(e){let t=e.resolvedOptions(),o={locale:t.locale,numberingSystem:t.numberingSystem,style:t.style,currency:t.currency,currencyDisplay:t.currencyDisplay,currencySign:t.currencySign,unit:t.unit,unitDisplay:t.unitDisplay,minimumIntegerDigits:t.minimumIntegerDigits,minimumFractionDigits:t.minimumFractionDigits,maximumFractionDigits:t.maximumFractionDigits,minimumSignificantDigits:t.minimumSignificantDigits,maximumSignificantDigits:t.maximumSignificantDigits,useGrouping:t.useGrouping===!0?"auto":t.useGrouping,notation:t.notation,compactDisplay:t.compactDisplay,signDisplay:t.signDisplay,roundingIncrement:t.roundingIncrement??1,roundingMode:t.roundingMode??"halfExpand",roundingPriority:t.roundingPriority??"auto",trailingZeroDisplay:t.trailingZeroDisplay??"auto"};for(let a in t)a in o||(o[a]=t[a]);return o}return d})()({current:{"Date":{"toLocaleString":{},"toLocaleDateString":{}},"DateTimeFormat":{"format":{"152173073":"14:56:06","164274523":"14:56:06"},"formatRange":{},"formatToParts":{},"formatRangeToParts":{}},"Number":{"toLocaleString":{}},"NumberFormat":{"format":{},"formatRange":{},"formatToParts":{},"formatRangeToParts":{}}}})</script>
 	<script>typeof document<"u"&&(window.process={...window.process,env:{...window.process?.env,NODE_ENV:"production"}});</script>
-	<link rel="modulepreload" fetchpriority="low" href="scripts/vendor/rolldown-runtime.Dh6celcD.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/react.DwDJOhmk.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/motion.C18vkCAc.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/framer.CxSNfGk-.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/AKS68MnlV.C11wAe7P.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/shared-lib.D0roSlvA.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/iYgDlDMmH.DJlzTzd_.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/70QkLoE1QvPadGxTse9yR7LHoZokHQS1S3318tZgY94.DgF9hrr8.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/Text_Opacity_Letters.Dpy5yNda.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/YbDBXdcRTfFOFACAX4lIZ0KWC_a4BeEiEw_DJduN2Lg.D3kv7tGb.mjs"><script type="module" async data-framer-bundle="main" fetchpriority="low" src="scripts/vendor/script_main.BD6UhLY-.mjs"></script><div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
+	<link rel="modulepreload" fetchpriority="low" href="scripts/vendor/rolldown-runtime.Dh6celcD.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/react.DwDJOhmk.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/motion.C18vkCAc.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/framer.CxSNfGk-.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/AKS68MnlV.C11wAe7P.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/shared-lib.D0roSlvA.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/iYgDlDMmH.DJlzTzd_.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/70QkLoE1QvPadGxTse9yR7LHoZokHQS1S3318tZgY94.DgF9hrr8.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/Text_Opacity_Letters.Dpy5yNda.mjs"><link rel="modulepreload" fetchpriority="low" href="scripts/vendor/YbDBXdcRTfFOFACAX4lIZ0KWC_a4BeEiEw_DJduN2Lg.D3kv7tGb.mjs"><div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
 <svg viewBox="0 0 11.12 11.681" overflow="visible" id="svg521249326_927"><path d="M 4.832 2.55 L 1.238 6.225 C 1.092 6.375 0.92 6.447 0.725 6.441 C 0.529 6.435 0.358 6.357 0.212 6.206 C 0.077 6.056 0.007 5.881 0 5.681 C -0.006 5.481 0.064 5.306 0.212 5.156 L 5.052 0.206 C 5.125 0.131 5.204 0.078 5.29 0.047 C 5.375 0.016 5.467 0.001 5.565 0 C 5.663 0 5.754 0.015 5.84 0.047 C 5.925 0.079 6.005 0.132 6.078 0.206 L 10.918 5.156 C 11.053 5.294 11.12 5.466 11.12 5.672 C 11.12 5.879 11.053 6.057 10.918 6.206 C 10.772 6.356 10.598 6.431 10.396 6.431 C 10.195 6.431 10.02 6.356 9.873 6.206 L 6.298 2.55 L 6.298 10.931 C 6.298 11.144 6.228 11.322 6.087 11.466 C 5.946 11.61 5.772 11.682 5.565 11.681 C 5.358 11.681 5.184 11.609 5.043 11.465 C 4.902 11.322 4.832 11.144 4.832 10.931 Z" fill="var(--token-291537f3-737c-43d1-939d-4c00dcf19a2a, rgb(255, 255, 255))"/></svg>
 </div>
 	<!-- Start of bodyEnd -->
     
-  <script>
-// Language selector — single controller for both language pages.
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapper = document.querySelector('.lang-selector-wrapper');
-  const btn = document.getElementById('lang-btn');
-  const dropdown = document.getElementById('lang-dropdown');
-  const currentLangText = document.getElementById('current-lang');
-  const options = document.querySelectorAll('.lang-option');
 
-  if (!wrapper || !btn || !currentLangText) return;
-
-  const path = window.location.pathname || '';
-  const isEnglishPage = document.documentElement.lang.toLowerCase().startsWith('en') || /(?:^|\/)en(?:\.html)?\/?$/.test(path);
-  const activeLang = isEnglishPage ? 'en' : 'es';
-
-  currentLangText.textContent = activeLang.toUpperCase();
-  options.forEach(option => {
-    option.classList.toggle('active', option.dataset.lang === activeLang);
-  });
-
-  const getVisibleMenuHost = () => {
-    const hosts = Array.from(document.querySelectorAll('.framer-h7k30g-container'));
-    return hosts.find(host => {
-      const rect = host.getBoundingClientRect();
-      const style = window.getComputedStyle(host);
-      return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
-    }) || null;
-  };
-
-  const mount = () => {
-    const host = getVisibleMenuHost();
-    if (!host) return false;
-    host.classList.add('vp-lang-host');
-    if (wrapper.parentElement !== host) host.appendChild(wrapper);
-    wrapper.classList.add('vp-lang-mounted');
-    return true;
-  };
-
-  const closeDropdown = () => {
-    wrapper.classList.remove('active', 'vp-lang-fixed-dropdown');
-    btn.setAttribute('aria-expanded', 'false');
-  };
-
-  const placeDropdown = () => {
-    if (!wrapper.classList.contains('active') || !dropdown) return;
-    const r = btn.getBoundingClientRect();
-    const dropdownHeight = dropdown.offsetHeight || 100;
-    const top = Math.min(window.innerHeight - dropdownHeight - 10, r.bottom + 6);
-    const right = Math.max(10, window.innerWidth - r.right);
-    wrapper.style.setProperty('--vp-lang-dropdown-top', `${Math.max(10, top)}px`);
-    wrapper.style.setProperty('--vp-lang-dropdown-right', `${right}px`);
-    wrapper.classList.add('vp-lang-fixed-dropdown');
-  };
-
-  // Framer may switch responsive variants just after DOMContentLoaded.
-  // Retry briefly so the selector is always mounted in the currently visible MENU.
-  let attempts = 0;
-  const tryMount = () => {
-    if (mount() || attempts++ > 30) return;
-    requestAnimationFrame(tryMount);
-  };
-  tryMount();
-  window.setTimeout(mount, 250);
-  window.setTimeout(mount, 750);
-  window.setTimeout(mount, 1500);
-
-  window.addEventListener('resize', () => {
-    mount();
-    placeDropdown();
-  }, { passive: true });
-  window.addEventListener('scroll', placeDropdown, { passive: true });
-
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
-    mount();
-    const isOpen = wrapper.classList.toggle('active');
-    btn.setAttribute('aria-expanded', String(isOpen));
-    if (isOpen) placeDropdown(); else wrapper.classList.remove('vp-lang-fixed-dropdown');
-  });
-
-  document.addEventListener('click', e => {
-    if (!wrapper.contains(e.target)) closeDropdown();
-  });
-
-  options.forEach(option => {
-    option.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      const selectedLang = option.dataset.lang;
-      closeDropdown();
-      window.location.href = selectedLang === 'en' ? '/en' : '/';
-    });
-  });
-});
-</script>
 
 </body>
 </html>
